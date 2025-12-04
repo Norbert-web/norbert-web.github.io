@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive OS-Style Website</title>
+<style>
+/* ======= Reset & Font ======= */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+
+/* ======= Wallpaper & Particles ======= */
+body { overflow:hidden; background:#0a0a0f; }
+#wallpaper { position: fixed; top:0; left:0; width:100%; height:100%; background: url('images/futuristic.jpg') no-repeat center/cover; z-index:-2; }
+#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+
+/* ======= Taskbar ======= */
+#taskbar {
+    position: fixed; bottom:0; left:50%; transform: translateX(-50%);
+    width: 90%; height:50px; background: rgba(0,0,50,0.6);
+    backdrop-filter: blur(10px); border-radius: 15px 15px 0 0;
+    display: flex; align-items:center; justify-content:space-between; padding:0 10px; color:white;
+}
+.task-icon { margin:0 5px; cursor:pointer; font-size:1.5rem; transition:0.2s; }
+.task-icon:hover { transform: scale(1.2); filter: drop-shadow(0 0 5px cyan); }
+#taskbar-clock { font-size:0.9rem; }
+#start-button { cursor:pointer; font-size:1.5rem; }
+
+/* ======= Start Menu ======= */
+#start-menu {
+    position: fixed; bottom:60px; left:10px;
+    background: rgba(0,0,50,0.8); backdrop-filter: blur(15px);
+    padding:20px; border-radius:15px; display:flex; flex-direction:column; gap:10px;
+}
+.hidden { display:none; }
+.start-app { padding:10px; cursor:pointer; border-radius:10px; transition:0.2s; }
+.start-app:hover { background: rgba(255,255,255,0.2); }
+
+/* ======= Windows ======= */
+.window {
+    position:absolute; top:100px; left:100px;
+    width:500px; height:300px; background: rgba(0,0,50,0.7);
+    backdrop-filter: blur(15px); border-radius:15px;
+    border:1px solid rgba(255,255,255,0.2); box-shadow:0 0 20px rgba(0,0,0,0.5);
+    display:flex; flex-direction:column; animation:fadeIn 0.3s ease; overflow:hidden; cursor:move;
+    z-index:1;
+}
+.window .title-bar {
+    background: rgba(0,0,50,0.9); padding:5px 10px;
+    display:flex; justify-content:space-between; align-items:center; font-weight:bold; cursor:move;
+}
+.window .title-bar .buttons span { margin-left:5px; cursor:pointer; }
+.window .content { flex:1; padding:10px; overflow:auto; color:white; }
+
+/* ======= Fade animation ======= */
+@keyframes fadeIn { from {opacity:0; transform: scale(0.9);} to {opacity:1; transform: scale(1);} }
+
+/* ======= Music toggle ======= */
+#music-toggle {
+    position:fixed; bottom:70px; right:20px; font-size:1.5rem;
+    background: rgba(0,0,50,0.6); backdrop-filter:blur(10px);
+    border:none; border-radius:50%; color:white; cursor:pointer; padding:10px;
+}
+</style>
+</head>
+<body>
+
+<!-- Wallpaper -->
+<div id="wallpaper"></div>
+
+<!-- Particles -->
+<div id="particles"></div>
+
+<!-- Taskbar -->
+<div id="taskbar">
+    <div id="start-button">🪟</div>
+    <div id="taskbar-icons">
+        <div class="task-icon" data-app="home">🏠</div>
+        <div class="task-icon" data-app="about">👤</div>
+        <div class="task-icon" data-app="projects">📁</div>
+        <div class="task-icon" data-app="gallery">🖼️</div>
+        <div class="task-icon" data-app="contact">✉️</div>
+        <div class="task-icon" data-app="blog">📝</div>
+        <div class="task-icon" data-app="music">🎵</div>
+        <div class="task-icon" data-app="settings">⚙️</div>
+        <div class="task-icon" data-app="downloads">⬇️</div>
+        <div class="task-icon" data-app="fun">🎮</div>
+    </div>
+    <div id="taskbar-clock"></div>
+</div>
+
+<!-- Start Menu -->
+<div id="start-menu" class="hidden">
+    <div class="start-app" data-app="home">🏠 Home</div>
+    <div class="start-app" data-app="about">👤 About Me</div>
+    <div class="start-app" data-app="projects">📁 Projects</div>
+    <div class="start-app" data-app="gallery">🖼️ Gallery</div>
+    <div class="start-app" data-app="contact">✉️ Contact</div>
+    <div class="start-app" data-app="blog">📝 Blog</div>
+    <div class="start-app" data-app="music">🎵 Music Player</div>
+    <div class="start-app" data-app="settings">⚙️ Settings</div>
+    <div class="start-app" data-app="downloads">⬇️ Downloads</div>
+    <div class="start-app" data-app="fun">🎮 Fun App</div>
+</div>
+
+<!-- Windows Container -->
+<div id="windows-container"></div>
+
+<!-- Background Music -->
+<audio id="bg-music" loop>
+    <source src="music/ambient.mp3" type="audio/mpeg">
+</audio>
+<button id="music-toggle">🎵</button>
+
+<script>
+// ======= Clock =======
+function updateClock(){
+    document.getElementById('taskbar-clock').textContent = new Date().toLocaleTimeString();
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// ======= Start Menu Toggle =======
+const startButton = document.getElementById('start-button');
+const startMenu = document.getElementById('start-menu');
+startButton.addEventListener('click',()=>startMenu.classList.toggle('hidden'));
+
+// ======= Background Music Toggle =======
+const music = document.getElementById('bg-music');
+const musicBtn = document.getElementById('music-toggle');
+musicBtn.addEventListener('click',()=>{ if(music.paused) music.play(); else music.pause(); });
+
+// ======= Window System =======
+const windowsContainer = document.getElementById('windows-container');
+const apps = document.querySelectorAll('.task-icon, .start-app');
+let highestZ = 1;
+
+apps.forEach(app=>{
+    app.addEventListener('click',()=>{ openWindow(app.dataset.app); startMenu.classList.add('hidden'); });
+});
+
+function openWindow(appName){
+    // Check if window already exists
+    let existing = document.querySelector(`.window[data-app="${appName}"]`);
+    if(existing){
+        existing.style.display='flex';
+        existing.style.zIndex = ++highestZ;
+        return;
+    }
+
+    const win = document.createElement('div');
+    win.classList.add('window');
+    win.dataset.app = appName;
+    win.style.top = `${100+Math.random()*100}px`;
+    win.style.left = `${100+Math.random()*100}px`;
+    win.style.zIndex = ++highestZ;
+
+    // Window content
+    win.innerHTML=`
+        <div class="title-bar">
+            ${appName.charAt(0).toUpperCase()+appName.slice(1)}
+            <div class="buttons">
+                <span class="minimize">➖</span>
+                <span class="maximize">🔲</span>
+                <span class="close">❌</span>
+            </div>
+        </div>
+        <div class="content">
+            <p>Welcome to the ${appName} app!</p>
+        </div>
+    `;
+    windowsContainer.appendChild(win);
+
+    // Buttons
+    const closeBtn = win.querySelector('.close');
+    closeBtn.addEventListener('click',()=>win.remove());
+
+    const minimizeBtn = win.querySelector('.minimize');
+    minimizeBtn.addEventListener('click',()=>win.style.display='none');
+
+    const maximizeBtn = win.querySelector('.maximize');
+    let isMaximized=false, prev={};
+    maximizeBtn.addEventListener('click',()=>{
+        if(!isMaximized){
+            prev = {top:win.style.top, left:win.style.left, width:win.style.width, height:win.style.height};
+            win.style.top='50px'; win.style.left='50px'; win.style.width='90%'; win.style.height='80%';
+            isMaximized=true;
+        } else {
+            win.style.top=prev.top; win.style.left=prev.left;
+            win.style.width=prev.width; win.style.height=prev.height;
+            isMaximized=false;
+        }
+    });
+
+    // Dragging
+    let isDragging=false, offsetX, offsetY;
+    const titleBar = win.querySelector('.title-bar');
+    titleBar.addEventListener('mousedown', e=>{
+        isDragging=true; offsetX=e.clientX-win.offsetLeft; offsetY=e.clientY-win.offsetTop;
+        win.style.zIndex = ++highestZ;
+    });
+    document.addEventListener('mousemove', e=>{ if(!isDragging) return; win.style.left=e.clientX-offsetX+'px'; win.style.top=e.clientY-offsetY+'px'; });
+    document.addEventListener('mouseup', ()=>isDragging=false);
+}
+
+// ======= Particles =======
+for(let i=0;i<40;i++){
+    let p=document.createElement("div");
+    p.classList.add("particle");
+    p.style.position='absolute';
+    p.style.background='rgba(255,255,255,0.7)';
+    p.style.borderRadius='50%';
+    p.style.width=(3+Math.random()*5)+'px';
+    p.style.height=p.style.width;
+    p.style.left=Math.random()*100+'%';
+    p.style.top=Math.random()*100+'%';
+    p.style.animation=`float ${4+Math.random()*4}s infinite linear`;
+    document.getElementById("particles").appendChild(p);
+}
+</script>
+
+</body>
+</html>
