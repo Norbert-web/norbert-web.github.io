@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Awesome Website</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #4f46e5, #9333ea);
+        overflow: hidden;
+        transition: 0.4s;
+    }
+
+    /* Loading Screen */
+    #loader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        z-index: 999;
+    }
+
+    /* Floating particles */
+    .particle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: rgba(255,255,255,0.7);
+        border-radius: 50%;
+        animation: float 6s infinite linear;
+    }
+    @keyframes float {
+        from { transform: translateY(0); }
+        to { transform: translateY(-120px); }
+    }
+
+    /* Container */
+    .container {
+        text-align: center;
+        color: white;
+        padding-top: 100px;
+    }
+
+    /* Moving Banner */
+    .banner {
+        width: 100%;
+        background: rgba(255,255,255,0.15);
+        padding: 10px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        color: white;
+        font-size: 1.2rem;
+    }
+    .banner span {
+        display: inline-block;
+        padding-left: 100%;
+        animation: move 15s linear infinite;
+    }
+    @keyframes move {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-100%); }
+    }
+
+    /* Typewriter */
+    #typewriter {
+        font-size: 2.2rem;
+        margin-top: 15px;
+        font-weight: bold;
+        border-right: 3px solid white;
+        width: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: typing 4s steps(30) forwards, blink .7s infinite;
+    }
+    @keyframes typing {
+        from { width: 0; }
+        to { width: 300px; }
+    }
+    @keyframes blink {
+        50% { border-color: transparent; }
+    }
+
+    /* Button */
+    .btn {
+        margin-top: 25px;
+        padding: 12px 25px;
+        background: white;
+        color: #4f46e5;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        box-shadow: 0 0 10px white;
+    }
+    .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 25px white;
+    }
+
+    /* Light/Dark Mode Switch */
+    .switch {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: white;
+        color: black;
+        padding: 8px 15px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+
+    /* Simple Navigation Pages */
+    .nav a {
+        color: white;
+        margin: 0 10px;
+        font-size: 1.1rem;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .nav a:hover {
+        text-shadow: 0 0 10px white;
+    }
+
+    /* Slideshow */
+    .slideshow {
+        margin: 40px auto;
+        width: 300px;
+        height: 200px;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 0 15px white;
+    }
+    .slideshow img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: none;
+    }
+    .slideshow img.active {
+        display: block;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div id="loader">Loading...</div>
+
+<div class="banner">
+    <span>Welcome to my awesome animated website — Enjoy the experience! ✨</span>
+</div>
+
+<div class="switch" onclick="toggleMode()">Toggle Theme</div>
+
+<!-- Floating particles -->
+<div id="particles"></div>
+
+<div class="container">
+    <h1 id="logo">My Website</h1>
+
+    <div id="typewriter">Hello, Welcome!</div>
+
+    <button class="btn" onclick="playSound()">Play Sound</button>
+
+    <div class="nav">
+        <a href="#">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <div class="slideshow">
+        <img src="img1.jpg" class="active">
+        <img src="img2.jpg">
+        <img src="img3.jpg">
+    </div>
+</div>
+
+<!-- Audio -->
+<audio id="sound">
+    <source src="sound.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+/* LOADING SCREEN */
+window.onload = function () {
+    setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+    }, 1500);
+};
+
+/* SOUND */
+function playSound() {
+    document.getElementById("sound").play();
+}
+
+/* DARK/LIGHT MODE */
+function toggleMode() {
+    if (document.body.style.background === "white") {
+        document.body.style.background = "linear-gradient(135deg,#4f46e5,#9333ea)";
+        document.body.style.color = "white";
+    } else {
+        document.body.style.background = "white";
+        document.body.style.color = "black";
+    }
+}
+
+/* PARTICLES */
+for (let i = 0; i < 40; i++) {
+    let p = document.createElement("div");
+    p.classList.add("particle");
+    p.style.left = Math.random() * 100 + "%";
+    p.style.top = Math.random() * 100 + "%";
+    p.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.getElementById("particles").appendChild(p);
+}
+
+/* SLIDESHOW */
+let slideIndex = 0;
+setInterval(() => {
+    let slides = document.querySelectorAll(".slideshow img");
+    slides[slideIndex].classList.remove("active");
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add("active");
+}, 3000);
+</script>
+
+</body>
+</html>
