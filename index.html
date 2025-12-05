@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>SmartOS - Read, Listen, and More</title>
+  <title>Bluebird UG - Read, Listen, and More</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:wght@400;700">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <style>
@@ -201,17 +201,19 @@
     <section id="page-home" class="app-page active">
       <div class="card" style="text-align:center;">
         <div style="font-size:2.2em;">👋</div>
-        <div class="card-title">Welcome to SmartOS Mobile!</div>
-        <div class="card-meta">A modern mobile OS for reading, music, education & more.</div>
-        <div>Start by browsing <span style="color:var(--accent);">Books</span> or Music, and check UNEB for resources and results.</div>
+        <div class="card-title">Welcome to Bluebird Uganda!</div>
+        <div class="card-meta">A developed for reading, music, education & more.</div>
+        <div>Start by browsing <span style="color:var(--accent);">Books</span> or Music, and check UNEB for resources and results.
+        Boost your mind through reading our books,UNEB past papers both UCE and PLE</div>
       </div>
       <div class="card">
-        <div class="card-title">Recent News & Updates</div>
+        <div class="card-title">Bluebird features</div>
         <ul style="padding-left:1.2em;">
           <li>✨ Now optimized for mobile: smooth swipes, big tabs, full reader.</li>
           <li>📚 Book reader fully supports dynamic content.</li>
           <li>🎵 Listen to music while studying.</li>
           <li>📝 Check UNEB past papers & news.</li>
+          <li>💥Have ample time for best studying,pass exams with flying colors </li>
         </ul>
       </div>
     </section>
@@ -237,6 +239,7 @@
       </div>
     </section>
 
+
     <!-- UNEB Page -->
     <section id="page-uneb" class="app-page">
       <div class="card">
@@ -249,6 +252,29 @@
         </ul>
       </div>
     </section>
+      
+      <!-- About Page -->
+    <section id="page-about" class="app-page">
+      <div class="card" style="text-align:center;">
+        <div style="font-size:2.5em;">🕊️</div>
+        <div class="card-title">About Bluebird UG</div>
+        <div class="card-meta">Created by students, for students.</div>
+        <div>
+          <p>
+            Bluebird UG is here to help fellow students with inspiring stories, music for relaxation, and learning resources like books and UNEB past papers.
+          </p>
+          <p>
+            <strong>Our Mission:</strong> Empower every student with creativity, knowledge, and support.<br>
+            <strong>About Me:</strong> I’m Nobert Lamn, passionate about story writing and singing.
+            <li>I am currently studying at Legacy Mission High School. And my vision is to create an impressive network environment for students to transform and excel in🔥</li>
+          </p>
+          <p>
+            Together, let's learn, dream, and connect!
+          </p>
+        </div>
+      </div>
+    </section>
+  
   </main>
 
   <!-- Book Reader Modal -->
@@ -278,6 +304,11 @@
       <i class="material-icons">school</i>
       UNEB
     </a>
+ </a>
+  <a class="tab-item" data-page="about">
+    <i class="material-icons">info</i>
+    About
+  </a>
   </nav>
 
   <script>
@@ -294,6 +325,8 @@
     });
 
     // Books: Example Book List
+
+
     const sampleBooks = [
       {
         title: "The Power of Now",
@@ -312,7 +345,132 @@
         author: "UNEB",
         desc: "Official Chemistry past examination, download the full paper.",
         content: "This paper contains Section A and B, answering the following..."
-      }
+      },
+  
+// Add this to your sampleBooks array in index.html:
+{
+  title: "Scientific Names of 100 Common Insects, Plants, Birds, and Animals in Uganda",
+  author: "Norbert",
+  desc: "A handy reference guide for students and nature lovers. Discover the scientific names of insects, plants, birds, and animals you’ll find in Uganda.",
+  content: `
+  <b>INSECTS</b>
+  <ul>
+    <li>Mosquito – <i>Anopheles gambiae</i></li>
+    <li>Housefly – <i>Musca domestica</i></li>
+    <li>Tsetse fly – <i>Glossina morsitans</i></li>
+    <li>Termite – <i>Macrotermes bellicosus</i></li>
+    <li>Honey bee – <i>Apis mellifera</i></li>
+    <li>Cockroach – <i>Periplaneta americana</i></li>
+    <li>Fruit fly – <i>Bactrocera dorsalis</i></li>
+    <li>Ant – <i>Camponotus spp.</i></li>
+    <li>Butterfly (African monarch) – <i>Danaus chrysippus</i></li>
+    <li>Firefly – <i>Lampyridae spp.</i></li>
+    <li>Dragonfly – <i>Anax imperator</i></li>
+    <li>Grasshopper – <i>Caelifera spp.</i></li>
+    <li>Cricket – <i>Gryllus bimaculatus</i></li>
+    <li>Beetle (Dung beetle) – <i>Scarabaeus sacer</i></li>
+    <li>Praying mantis – <i>Mantis religiosa</i></li>
+    <li>Locust – <i>Schistocerca gregaria</i></li>
+    <li>Black ant – <i>Lasius niger</i></li>
+    <li>Weevil (Banana weevil) – <i>Cosmopolites sordidus</i></li>
+    <li>Whitefly – <i>Bemisia tabaci</i></li>
+    <li>Butterfly (Citrus swallowtail) – <i>Papilio demodocus</i></li>
+  </ul>
+  <b>PLANTS</b>
+  <ul>
+    <li>Banana – <i>Musa acuminata</i></li>
+    <li>Maize – <i>Zea mays</i></li>
+    <li>Beans – <i>Phaseolus vulgaris</i></li>
+    <li>Cassava – <i>Manihot esculenta</i></li>
+    <li>Coffee (Robusta) – <i>Coffea canephora</i></li>
+    <li>Mango – <i>Mangifera indica</i></li>
+    <li>Papaya – <i>Carica papaya</i></li>
+    <li>Eucalyptus – <i>Eucalyptus grandis</i></li>
+    <li>Pine – <i>Pinus patula</i></li>
+    <li>Avocado – <i>Persea americana</i></li>
+    <li>Sweet potato – <i>Ipomoea batatas</i></li>
+    <li>Potato – <i>Solanum tuberosum</i></li>
+    <li>Groundnut – <i>Arachis hypogaea</i></li>
+    <li>Cotton – <i>Gossypium hirsutum</i></li>
+    <li>Rice – <i>Oryza sativa</i></li>
+    <li>Sorghum – <i>Sorghum bicolor</i></li>
+    <li>Millet – <i>Eleusine coracana</i></li>
+    <li>Orange tree – <i>Citrus sinensis</i></li>
+    <li>Guava – <i>Psidium guajava</i></li>
+    <li>Tea – <i>Camellia sinensis</i></li>
+  </ul>
+  <b>BIRDS</b>
+  <ul>
+    <li>Grey crowned crane – <i>Balearica regulorum</i></li>
+    <li>Marabou stork – <i>Leptoptilos crumenifer</i></li>
+    <li>Shoebill – <i>Balaeniceps rex</i></li>
+    <li>African fish eagle – <i>Haliaeetus vocifer</i></li>
+    <li>Pied kingfisher – <i>Ceryle rudis</i></li>
+    <li>Hadada ibis – <i>Bostrychia hagedash</i></li>
+    <li>African grey parrot – <i>Psittacus erithacus</i></li>
+    <li>Helmeted guinea fowl – <i>Numida meleagris</i></li>
+    <li>Yellow-billed stork – <i>Mycteria ibis</i></li>
+    <li>White-backed vulture – <i>Gyps africanus</i></li>
+    <li>Black kite – <i>Milvus migrans</i></li>
+    <li>Grey heron – <i>Ardea cinerea</i></li>
+    <li>Speckled mousebird – <i>Colius striatus</i></li>
+    <li>Red-chested sunbird – <i>Cinnyris erythroceria</i></li>
+    <li>African jacana – <i>Actophilornis africanus</i></li>
+    <li>African hoope – <i>Upupa africana</i></li>
+    <li>Spur-winged lapwing – <i>Vanellus spinosus</i></li>
+    <li>African pied wagtail – <i>Motacilla aguimp</i></li>
+    <li>African thrush – <i>Turdus pelios</i></li>
+    <li>Little egret – <i>Egretta garzetta</i></li>
+  </ul>
+  <b>ANIMALS & REPTILES</b>
+  <ul>
+    <li>African elephant – <i>Loxodonta africana</i></li>
+    <li>African lion – <i>Panthera leo</i></li>
+    <li>Leopard – <i>Panthera pardus</i></li>
+    <li>Cheetah – <i>Acinonyx jubatus</i></li>
+    <li>Hippopotamus – <i>Hippopotamus amphibius</i></li>
+    <li>Zebra – <i>Equus quagga</i></li>
+    <li>African buffalo – <i>Syncerus caffer</i></li>
+    <li>Mountain gorilla – <i>Gorilla beringei beringei</i></li>
+    <li>Chimpanzee – <i>Pan troglodytes</i></li>
+    <li>Warthog – <i>Phacochoerus africanus</i></li>
+    <li>Uganda kob – <i>Kobus kob thomasi</i></li>
+    <li>Waterbuck – <i>Kobus ellipsiprymnus</i></li>
+    <li>Bushbuck – <i>Tragelaphus scriptus</i></li>
+    <li>Impala – <i>Aepyceros melampus</i></li>
+    <li>Giraffe (Rothschild) – <i>Giraffa camelopardalis rothschildi</i></li>
+    <li>Hyena (Spotted) – <i>Crocuta crocuta</i></li>
+    <li>Jackal – <i>Canis mesomelas</i></li>
+    <li>African wild dog – <i>Lycaon pictus</i></li>
+    <li>Civet – <i>Civettictis civetta</i></li>
+    <li>Serval – <i>Leptailurus serval</i></li>
+    <li>Monitor lizard – <i>Varanus niloticus</i></li>
+    <li>Nile crocodile – <i>Crocodylus niloticus</i></li>
+    <li>African rock python – <i>Python sebae</i></li>
+    <li>Olive baboon – <i>Papio anubis</i></li>
+    <li>Vervet monkey – <i>Chlorocebus pygerythrus</i></li>
+    <li>Black-and-white colobus – <i>Colobus guereza</i></li>
+    <li>Cane rat – <i>Thryonomys swinderianus</i></li>
+    <li>African hare – <i>Lepus victoriae</i></li>
+    <li>Porcupine – <i>Hystrix africaeaustralis</i></li>
+    <li>Pangolin – <i>Smutsia temminckii</i></li>
+  </ul>
+  <b>ADDITIONAL SPECIES</b>
+  <ul>
+    <li>Tilapia – <i>Oreochromis niloticus</i></li>
+    <li>Catfish – <i>Clarias gariepinus</i></li>
+    <li>Lungfish – <i>Protopterus aethiopicus</i></li>
+    <li>Climbing perch – <i>Ctenopoma muriei</i></li>
+    <li>African bullfrog – <i>Pyxicephalus edulis</i></li>
+    <li>Reed frog – <i>Hyperolius viridiflavus</i></li>
+    <li>Tortoise – <i>Stigmochelys pardalis</i></li>
+    <li>Gecko – <i>Hemidactylus mabouia</i></li>
+    <li>Agama lizard – <i>Agama agama</i></li>
+    <li>African snail – <i>Achatina achatina</i> <!-- completed the missing snail name --></li>
+  </ul>
+  `
+}  
+  
     ];
 
     // Render books in Books page
